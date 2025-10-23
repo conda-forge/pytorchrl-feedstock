@@ -1,5 +1,5 @@
 {% set name = "pytorchrl" %}
-{% set version = "0.6.0" %}
+{% set version = "0.10.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/pytorch/rl/archive/v{{ version }}.tar.gz
-  sha256: 65ef0d83174e864480bf1370b19c3542dd980e4477855ac7c5bd883ccd47884d
+  sha256: 5f255a696ddb658421d6ce3045893d8d49b20f48c0e55f6d24d42f4a3800a9da
 
 build:
   script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 5
+  number: 0
   skip: true  # [win]
   rpaths:
     - lib
@@ -31,12 +31,13 @@ requirements:
     - ninja
     - pip
   run:
+    - pyvers
     - python
-    - pytorch
+    - pytorch >=2.1.0
     - numpy
     - packaging
     - cloudpickle
-    - tensordict >=0.5.0
+    - tensordict >=0.10.0,<0.11.0
 
 test:
   imports:
