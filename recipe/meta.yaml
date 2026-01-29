@@ -1,5 +1,5 @@
 {% set name = "pytorchrl" %}
-{% set version = "0.11.0" %}
+{% set version = "0.11.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/pytorch/rl/archive/v{{ version }}.tar.gz
-  sha256: 9db8c0065236267fa829e76d05cd61bb141d03ce4afb85723b6a16133a0037fd
+  sha256: 07218e28ddfd4e7a5e19154a621cad4090ae0904216bd227a6135f652e6e0c1d
 
 build:
   script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
   skip: true  # [win]
   rpaths:
     - lib
