@@ -38,6 +38,7 @@ requirements:
     - packaging
     - cloudpickle
     - tensordict >=0.13.0,<0.14.0
+    - hoptorch
 
 test:
   imports:
