@@ -31,13 +31,13 @@ requirements:
     - ninja
     - pip
   run:
-    - pyvers
+    - pyvers >=0.2.3
     - python
     - pytorch >=2.1.0
     - numpy
     - packaging
     - cloudpickle
-    - tensordict >=0.12.0,<0.13.0
+    - tensordict >=0.13.0,<0.14.0
 
 test:
   imports:
