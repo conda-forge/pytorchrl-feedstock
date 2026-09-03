@@ -1,28 +1,32 @@
-{% set name = "pytorchrl" %}
-{% set version = "0.13.3" %}
+schema_version: 1
+
+context:
+  name: pytorchrl
+  version: "0.13.3"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/pytorch/rl/archive/v{{ version }}.tar.gz
+  url: https://github.com/pytorch/rl/archive/v${{ version }}.tar.gz
   sha256: e35535c884c3fe65c3cc52a8620d614b3d6919829dc18210ed50c5cca647da75
 
 build:
+  number: 3
+  skip: win
   script:
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 2
-  skip: true  # [win]
-  rpaths:
-    - lib
-    - {{ SP_DIR }}/torch/lib
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  dynamic_linking:
+    rpaths:
+      - lib
+      - ${{ SP_DIR }}/torch/lib
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
   host:
     - python
     - setuptools
@@ -40,19 +44,17 @@ requirements:
     - tensordict >=0.13.0,<0.14.0
     - hoptorch
 
-test:
-  imports:
-    - torchrl
-  commands:
-    - pip check
-  requires:
-    - pip
+tests:
+  - python:
+      imports:
+        - torchrl
+      pip_check: true
 
 about:
-  home: https://github.com/pytorch/rl
   summary: A modular, primitive-first, python-first PyTorch library for Reinforcement Learning.
   license: MIT
   license_file: LICENSE
+  homepage: https://github.com/pytorch/rl
 
 extra:
   recipe-maintainers:
